@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="{% url 'user:register_handel' %}">
+                            {% csrf_token %}
+
+        <input id="n1" name="uname" class="text"   type="text" placeholder="请输入账户">
+        <br>
+        <input id="n2" name="upwd" class="text"   value="" type="password" placeholder="请输入密码">
+
+<br>
+        <input id="n3" name="cpwd" class="text"  value="" type="password" placeholder="请再次输入密码">
+
+<br>
+
+        <input type="file" name="image">
+        <input id="n1" name="nickname" class="text"   type="text" placeholder="请输入昵称">
+
+<br>
+        <input id="n1" name="true_name" class="text"   type="text" placeholder="请输入真实姓名">
+<br>
+
+        <input id="n1" name="birth" class="text"   type="text" placeholder="请输入出生年月日">
+<br>
+        <input id="n1" name="tel" class="text"   type="text" placeholder="请输入联系电话">
+
+<br>
+        <input id="n1" name="gender" class="text"   type="text" placeholder="请输入性别">
+<br>
+
+        <img src="{% url 'user:verifycode' %}">
+        <input class="text" type="text" value="" name="imgCode" placeholder="请输入验证码">
+<br>
+        <input type="file" name="avatar" >
+    <br>
+
+
+<br>
+        <input type="submit" value="注册" />
+    <input type="file" name="image01">
+
+</form>
+</body>
+</html>

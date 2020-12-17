@@ -1,0 +1,40 @@
+{% extends 'index_for_user.html' %}
+{% load staticfiles %}
+{% block messages %}
+
+    <hr>
+<p><h5>好友列表</h5></p>
+    <hr>
+    <div>{% for user in account_number %}
+
+        <form method="post" action="{% url 'user:show_friend' %}">
+        {% csrf_token %}
+            <input type="hidden" value="{{ user }}" name="friendID">
+        <h4><a>{{ user }}</a></h4>
+            <button type="submit" class="btn blue">查看信息</button>
+        </form>
+
+        <form method="post" action="{% url 'user:delete_friend' %}">
+        {% csrf_token %}
+            <input type="hidden" value="{{ user }}" name="friendID">
+            <button class="btn blue" type="submit" value="{{ user }}">删除好友</button>
+        </form>
+        <hr>
+        <form method="post" action="{% url 'comment:view_friend_comment' %}">
+        {% csrf_token %}
+            <input type="hidden" value="{{ user }}" name="friend">
+            <button type="submit" class="btn">查看对方留言板</button>
+        </form>
+
+        <hr>
+
+    {% endfor %}
+    </div>
+    <hr>
+
+{% endblock messages %}
+
+
+{% block research %}
+
+{% endblock research %}

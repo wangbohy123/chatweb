@@ -1,0 +1,60 @@
+{% extends 'show_date.html' %}
+{% load staticfiles %}
+{% block js %}
+<script type="text/javascript">
+$(function() {
+    $(".task_detail").hide();
+    $(".task_list").on("click", " li", function () {
+        $(".task_detail").show();
+        var $task_detail = $(".task_detail");
+        task_id = $(this).attr("id");
+        task = store.get(task_id);
+        var $table_id = document.getElementById()
+        var $remark = $(".remark")
+        $task_detail.find("input[type=text]").val(task.content)
+            .end().find("textarea.descr").val($remark.val())
+            .end().show();
+    });
+    $("button.detail_close").on("click", function () {
+        $(".task_detail").hide();
+    });
+})
+</script>
+{% endblock js %}
+{% block tables %}
+    <div class="nav nav2">
+			<div  id="add_btn" class="nav2_btn"><a href="{% url 'date:add_page' %}">添加待办事宜</a></div>
+			<div  id="unfinished_btn" class="nav2_btn"><a href="{% url 'date:view_tables' %}">待办事宜</a></div>
+			<div  id="finished_btn" class="nav2_btn"><a href="{% url 'date:view_finished' %}">已完成事宜</a></div>
+    </div>
+    <div class="task_list">
+        <ul>
+            {% for table in tables %}
+                {% if table.status == False %}
+                    <li class="unfinished" id="{{ table.id }}">
+                    <form method="post" action="{% url 'date:change_status' %}">
+                        {% csrf_token %}
+                    <input type="hidden" id="remark" value="{{ table.remark }}" class="remark" >
+                    <input type="hidden" value="{{ table.id }}" name="task_id">
+                    <button class="button" type="submit">代办</button>
+{#                    <span class="task_index">1</span>#}
+                    <span class="task_content">{{ table.thing_name }}</span>
+                    <span class="task_content">{{ table.remark }}</span>
+                    </form>
+                    </li>
+            {% endif %}
+            {% endfor %}
+		</ul>
+    </div>
+{#    <div class="task_detail">#}
+{#			<form id="task_detail" >#}
+{#                <p>待办事宜：</p>#}
+{#			    <input type="text" class="content" name="task_content">#}
+{#                <p>备注：</p>#}
+{#                <textarea  class="descr" name="task_descr">{{ table.remark }}</textarea>#}
+{#                <br><input type="submit" value="修改"></input>#}
+{#                <button type="button" class="detail_close">关闭</button>#}
+{#			</form>#}
+{#    </div>#}
+
+{% endblock tables %}

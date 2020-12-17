@@ -1,0 +1,17 @@
+{% extends 'friends_config.html' %}
+{% load staticfiles %}
+
+{% block messages %}
+<p>好友信息</p>
+    <h6>账户名：{{ number }}</h6>
+    <ul>
+    <li>头像：<img src="{{ friend.avatar.url }}"></li>
+    <li>邮箱：{{ mail }}</li>
+    <li>昵称：{{ nickname }}</li>
+    <li>出生日期：{{ friend.birth }}</li>
+    <li>电话：{{ friend.tel }}</li>
+    <li>性别：{{ friend.gender }}</li>
+    <li>真实姓名：{{ friend.true_name }}</li>
+
+    </ul>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'index_for_user.html' %}
+{% load staticfiles %}
+{% block messages %}
+    <div class="row">
+        <div class="col s9">
+    <p style="color: #8b1014">添加好友(在下面输入用户名):</p>
+
+    <form method="post" action="{% url 'user:add_page' %}">
+    {% csrf_token %}
+    <input type="text" name="research">
+    <button type="submit" class="btn blue-grey">查找</button>
+    </form>
+    {% if if_research %}
+
+
+        <div>
+        {% if available %}
+                    <p>查找结果：{{ massage }}</p>
+            {% else %}
+            <p style="color: #8b1014">查找结果：用户{{ massage }}存在 </p>
+            <form method="post" action="{% url 'user:add_friend' %}">
+                {% csrf_token %}
+                <input type="hidden" value="{{ massage }}" name="number">
+                <button type="submit" class="btn blue-grey">添加好友</button>
+            </form>
+
+        {% endif %}
+        {% endif %}
+        </div>
+    </div>
+
+
+    </div>
+
+{% endblock messages %}

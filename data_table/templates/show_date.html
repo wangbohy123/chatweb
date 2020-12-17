@@ -1,0 +1,79 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>My Todo</title>
+    <link href="{% static 'css/font.css' %}" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<script src="{% static 'js/jquery-3.1.1.js' %}"></script>
+	<script src="{% static 'js/store.min.js' %}"></script>
+    {% block js %}
+    {% endblock js %}
+{#	<script src="{% static 'js/main.js' %}"></script>#}
+</head>
+<body background="{% static 'images/12.png' %}">
+    <nav class="blue lighten-3">
+        <div class="nav-wrapper container">
+          <a href="#" class="brand-logo">Chat</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="{% url 'user:index_for_user' %}">{{ uname }}</a></li>
+              <li><a href="{% url 'user_center:show' %}">聊天吧！</a></li>
+              <li><a href="{% url 'comment:show_comment' %}">留言板</a></li>
+              <li><a href="{% url 'user:friend_config' %}">好友设置</a></li>
+              <li><a href="{% url 'user:friend_examine' %}">好友审核</a></li>
+              <li><a href="{% url 'user:view_personal' %}">个人信息</a></li>
+              <li><a href="{% url 'date:show_date' %}">我的行程</a></li>
+              <li><a href="{% url 'user:del_session' %}">登出</a></li>
+          </ul>
+        </div>
+    </nav>
+	<div class="box">
+		<h1>我的日程</h1>
+        {% block tables%}
+		<div class="nav">
+			<div  id="add_btn"><a href="{% url 'date:add_page' %}">添加待办事宜</a></div>
+			<div  id="unfinished_btn"> <a href="{% url 'date:view_tables' %}">待办事宜</a></div>
+			<div  id="finished_btn"><a href="{% url 'date:view_finished' %}">已完成事宜</a></div>
+		</div>
+
+        {% endblock %}
+{#		<form  id="add_task" method="post" action="{% url 'date:add_task' %}">#}
+{#			<p>待办事宜：</p>#}
+{##}
+{#			<input type="text" class="content" name="task_content">#}
+{#			<p>备注：</p>#}
+{#			<textarea  class="descr" cols="50" rows="600" name="task_descr"></textarea>#}
+{#			<input type="submit" value="确认"></input>#}
+{#		</form>#}
+{#		<div class="task_list">#}
+{#        <form>#}
+{#		<ul>#}
+{#            {% for table in tables %}#}
+{#                {% if table.status == False %}#}
+{#                    <li>{{ table.remark }}</li>#}
+{#                    <input type="hidden">#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#		</ul>#}
+{#        </form>#}
+{#		</div>#}
+{#		<div class="task_detail">#}
+{#            {% for table in going %}#}
+{#                <form id="task_detail" >#}
+{#			<p>待办事宜：</p>#}
+{#			<input type="text" class="content" name="task_content" placeholder="{{ table.thing_name }}">#}
+{#			<p>备注：</p>#}
+{#			<textarea  class="descr" name="task_descr">{{ table.remark }}</textarea>#}
+{#			<br><input type="submit" value="修改"></input>#}
+{#			<button type="button" class="detail_close">关闭</button>#}
+{#			</form>#}
+{#            {% endfor %}#}
+{##}
+{#		</div>#}
+	</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block body %}
+<nav class="blue lighten-3">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">Chat</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="{% url 'user:index_for_user' %}">{{ uname }}</a></li>
+          <li><a href="{% url 'user_center:show' %}">聊天吧！</a></li>
+          <li><a href="{% url 'comment:show_comment' %}">留言板</a></li>
+          <li><a href="{% url 'user:friend_config' %}">好友设置</a></li>
+          <li><a href="{% url 'user:friend_examine' %}">好友审核</a></li>
+          <li><a href="{% url 'user:view_personal' %}">个人信息</a></li>
+          <li><a href="{% url 'date:show_date' %}">我的行程</a></li>
+          <li><a href="{% url 'user:del_session' %}">登出</a></li>
+      </ul>
+    </div>
+</nav>
+    <div class="section" style="height: 80vh">
+    <div class="row">
+        <div class="col s3">
+        <div class="card">
+            <div id="users" class="collection">
+            {% if avatar %}
+                <hr>
+                <img src="{{ avatar.url }}" width="100px">
+                {% else %}
+                <p><a href="{% url 'user:load_file' %}">上传头像</a></p>
+            {% endif %}
+
+                <div><p class="pagination-sm">我共有{{ count }}位好友:</p></div>
+                <div>
+                    {% for user in f %}
+                        <P><img src="{{ user.avatar.url }}" width="60px">
+                    <a>{{ user.account_number }}</a></P>
+                    {% endfor %}
+                </div>
+            </div>
+        {% csrf_token %}
+
+        </div>
+        </div>
+        <div class="col s9">
+            <div class="card">
+            <div id="board" class="section grey lighten-3" style="height: 68vh; padding: 5px; overflow-y: scroll">
+                <img src="{% static 'images/04.png' %}" width="600px" >
+                {% block messages %}
+                    <ul>
+                        <br><hr>
+                <li><a href="{% url 'user:add_page' %}">查找好友</a></li>
+                        <br><hr>
+                   <li> <a href="{% url 'user:find_friend' %}">查找我可能认识的人</a></li>
+                    <br><hr>
+                    </ul>
+                {% endblock messages %}
+            </div>
+
+            </div>
+        </div>
+    </div>
+    {% block research %}
+        {% endblock research %}
+    </div>
+
+
+{% endblock body %}

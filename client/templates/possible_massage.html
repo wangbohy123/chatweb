@@ -1,0 +1,25 @@
+{% extends 'index_for_user.html' %}
+
+{% block messages %}
+    <p>可能认识的人：</p>
+    {% if possible_count == 0 %}
+        <p>还没有可能认识的人，多加好友吧！</p>
+
+    {% else %}
+    {% for foo in possable %}
+      <h5><a>{{ foo }}</a></h5>
+        <form method="post" action="{% url 'user:show_friend' %}">
+        {% csrf_token %}
+            <input type="hidden" value="{{ foo }}" name="friendID">
+        <button type="submit" class="btn btn-block">查看信息</button>
+        </form>
+        <form method="post" action="{% url 'user:add_friend' %}">
+        {% csrf_token %}
+            <input type="hidden" value="{{ foo }}" name="number">
+        <button type="submit" class="btn blue">添加好友</button>
+        </form>
+    {% endfor %}
+    {% endif %}
+
+
+{% endblock %}

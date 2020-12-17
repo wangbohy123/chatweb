@@ -1,0 +1,80 @@
+{% load staticfiles %}
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+        <title>WeChat</title>
+        <link href="{% static 'css/font.css' %}" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+{#        <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>#}
+    </head>
+
+    <body background="{% static 'images/10.jpg' %}">
+    {% block body %}
+        <div class="section lighten-3">
+            <div class="container white-text center-align text">
+            <h2>WeChat</h2>
+            <p>欢迎来到WeChat</p>
+            <div class="chip">
+                <img src="{% static 'images/01.jpg' %}" class="white">
+                家人
+            </div>
+            <div class="chip">
+                <img src="{% static 'images/03.png' %}" class="white">
+                朋友
+            </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+            <div class="col s12 m8 l6 offset-m2 offset-l3">
+                <div class="section center-block">
+                <div>
+                    {% block form %}
+                    <h3>
+                    登陆
+                    </h3>
+                    <form id="login-form" class="form-group" method="post" action="{% url 'user:longin_handel' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="uname" id="id_username" type="text">
+                                <label for="id_username">Username</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="upwd" id="id_password" type="password">
+                                <label for="id_password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s8">
+                                <a href="{% url 'user:register' %}">注册</a>
+                            </div>
+                            <div class="col s4">
+                            <div class="right">
+                                <button type="submit" class="btn blue waves-effect waves-light pull-s12">登陆</button>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                    {% endblock %}
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+
+  </html>

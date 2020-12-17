@@ -1,0 +1,31 @@
+{% extends 'show_date.html' %}
+{% load staticfiles %}
+{% block js %}
+{% endblock js %}
+{% block tables %}
+    <div class="nav nav2">
+			<div  id="add_btn" class="nav2_btn"><a href="{% url 'date:add_page' %}">添加待办事宜</a></div>
+			<div  id="unfinished_btn" class="nav2_btn"><a href="{% url 'date:view_tables' %}">待办事宜</a></div>
+			<div  id="finished_btn" class="nav2_btn"><a href="{% url 'date:view_finished' %}">已完成事宜</a></div>
+    </div>
+    <div class="task_list">
+        <ul>
+            {% for table in tables %}
+                {% if table.status == True %}
+                    <li class="unfinished" id="{{ table.id }}">
+                    <form method="post" action="{% url 'date:delete_task' %}">
+                        {% csrf_token %}
+                    <input type="hidden" id="remark" value="{{ table.remark }}" class="remark" >
+                    <input type="hidden" value="{{ table.id }}" name="task_id">
+                    <button class="button" type="submit">删除</button>
+                    <span class="task_index">1</span>
+                    <span class="task_content">{{ table.thing_name }}</span>
+                    <span class="task_content">{{ table.remark }}</span>
+                    </form>
+                    </li>
+            {% endif %}
+            {% endfor %}
+		</ul>
+    </div>
+
+{% endblock tables %}

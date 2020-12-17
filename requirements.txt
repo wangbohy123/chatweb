@@ -1,0 +1,1 @@
+mysqlclient==1.3.12django==2.0.4djangorestframework==3.7.3pillow==5.0.0

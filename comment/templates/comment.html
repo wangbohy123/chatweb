@@ -1,0 +1,80 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!--Import Google Icon Font-->
+        <title>WeChat</title>
+        <link href="{% static 'css/font.css' %}" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'comments/comment.css' %}"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+
+</head>
+<body background="{% static 'images/08.jpg' %}">
+<nav class="blue lighten-3">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">Chat</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="{% url 'user:index_for_user' %}">{{ uname }}</a></li>
+          <li><a href="{% url 'user_center:show' %}">聊天吧！</a></li>
+          <li><a href="{% url 'comment:show_comment' %}">留言板</a></li>
+          <li><a href="{% url 'user:friend_config' %}">好友设置</a></li>
+          <li><a href="{% url 'user:friend_examine' %}">好友审核</a></li>
+          <li><a href="{% url 'user:view_personal' %}">个人信息</a></li>
+          <li><a href="{% url 'date:show_date' %}">我的行程</a></li>
+          <li><a href="{% url 'user:del_session' %}">登出</a></li>
+{#          <i class="material-icons"></i>#}
+      </ul>
+    </div>
+</nav>
+<div class="center header-bar" style="border-top: 10px">
+    <img src="{% static 'images/11.jpg' %}" width="1000px">
+
+    <form action="{% url 'comment:send_comment' %}" method="post" class="basic-grey">
+    {% csrf_token %}
+        <h1>发表留言
+            <span>Please fill all the texts in the fields.</span>
+        </h1>
+        <input type="hidden" value="{{ receiver }}" name="receiver">
+        <input type="hidden" value="{{ user.account_number }}" name="sender">
+
+        <label>
+            <span>Message :</span>
+            <textarea id="message" name="message" placeholder="Your Message to Us">            </textarea>
+        </label>
+
+        <label>
+            <span>&nbsp;</span>
+            <input type="submit" class="button" value="Send" />
+        </label>
+    </form>
+
+        <h3>留言板</h3>
+<hr>
+    <div style="border: dot-dash">
+        {% if length == 0 %}
+        <h6>还没有留言，来坐沙发吧！</h6>
+            {% else %}
+            <ul>
+            {% for comment in comments %}
+                <li>from:{{ comment.sender.nickname }}:{{ comment.saying }}</li>
+                <hr>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+<br><br>
+<hr>
+
+<hr>
+</body>
+
+</html>

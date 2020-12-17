@@ -1,0 +1,18 @@
+{% extends 'index_for_user.html' %}
+{% load staticfiles %}
+{% block messages %}
+    <hr>
+  <p>个人信息</p>
+    <h6>账户名：{{ me.account_number }}</h6>
+    <ul>
+    <li>头像：<img src="{{ me.avatar.url }}"></li>
+    <li>邮箱：{{ me.account_mail }}</li>
+    <li>昵称：{{ me.nickname }}</li>
+    <li>出生日期：{{ me.birth }}</li>
+    <li>电话：{{ me.tel }}</li>
+    <li>性别：{{ me.gender }}</li>
+    <li>真实姓名：{{ me.true_name }}</li>
+
+    </ul>
+
+{% endblock messages %}

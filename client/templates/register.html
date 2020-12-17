@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{# 注册页面 #}
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>register</title>
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/normalize.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/demo.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/component.css' %}" />
+    <style type="text/css">
+             body{font-size:12px;}
+             p,div{margin:0;padding:0}
+             .textarea{
+                 width:350px;
+                 height:100px;
+                 position:absolute;
+                 border-radius:10px;
+                 background-color:#222;
+                 color:white;
+                 resize:none;
+                 border: 2px solid #009688;
+                 z-index:9
+            }
+             .note{
+             position:absolute;line-height:20px;padding:3px 5px;
+             }
+        </style>
+<!--[if IE]>
+	<script src="js/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+		<div class="container demo-1">
+			<div class="content">
+				<div id="large-header" class="large-header">
+					<canvas id="demo-canvas"></canvas>
+					<div class="logo_box"  style="height:1000px;width:1000px;overflow:auto">
+						<h3>欢迎你来到WeChat</h3>
+						<form method="post" action="{% url 'user:register_handel' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+
+							<div class="input_outer">
+								<span class="u_user"></span>
+								<input id="n1" name="uname" class="text"   type="text" placeholder="请输入账户">
+								<span class="error">用户名的长度至少6位!</span>
+							</div>
+							<div class="input_outer">
+								<span class="us_uer"></span>
+								<input id="n2" name="upwd" class="text"   value="" type="password" placeholder="请输入密码">
+								<span class="error">密码的长度至少6位!</span>
+							</div>
+							<div class="input_outer">
+								<span class="us_uer"></span>
+								<input id="n3" name="cpwd" class="text"  value="" type="password" placeholder="请再次输入密码">
+								<span class="error">两次输入密码不一致!</span>
+							</div>
+
+                            <div class="input_outer">
+								<span class="u_user"></span>
+								<input id="n1" name="nickname" class="text"   type="text" placeholder="请输入昵称">
+
+							</div>
+                            <div class="input_outer">
+								<span class="u_user"></span>
+								<input id="n1" name="true_name" class="text"   type="text" placeholder="请输入真实姓名">
+
+							</div>
+                            <div class="input_outer">
+								<span class="u_user"></span>
+								<input id="n1" name="birth" class="text"   type="text" placeholder="请输入出生年月日">
+							</div>
+
+                            <div class="input_prise">
+								<span class="u_user"></span>
+								<input id="n1" name="tel" class="text"   type="text" placeholder="请输入联系电话">
+							</div>
+                            <div class="input_image">
+								<span class="u_user"></span>
+								<p class="us_users">
+									<select name="gender"  >
+										<option  value="0">男</option>
+										<option  value="1">女</option>
+									</select>
+								</p>
+							</div>
+
+                            <div class="input_imageT">
+								<span class="uss_uer"><img src="{% url 'user:verifycode' %}"></span>
+                                <input class="text" type="text" value="" name="imgCode" placeholder="请输入验证码">
+								<span class="error">验证码错误!</span>
+                            </div>
+                            <div>
+                                <input type="file" name="avatar" >
+                            </div>
+
+							<h5 style="padding-left:62px;">我已阅读并同意<a href="#" target="_blank" style="color:#0096e6;">《WeChat用户协议》</a></h5>
+							<div class="mb2">
+								<a class="act-but submit" href="javascript:;" style="color: #FFFFFF">
+								<input type="submit" value="注册" />
+								</a>
+							</div>
+							<h6 style="padding-left:160px;">
+							<a href="{% url 'user:index' %}"><font color="#0096e6">已有账号？点击登录</font></a>
+							</h6>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="{% static 'login/js/TweenLite.min.js' %}"></script>
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'login/js/EasePack.min.js' %}"></script>
+		<script src="{% static 'login/js/rAF.js' %}"></script>
+		<script src="{% static 'login/js/demo-1.js' %}"></script>
+{#		<script src="{% static 'login/js/check.js' %}"></script>#}
+		<div style="text-align:center;">
+		</div>
+	</body>
+</html>

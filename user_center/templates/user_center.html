@@ -1,0 +1,65 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>user——center</title>
+    <meta charset="UTF-8">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="{% static 'scripts/bootstrap-3.3.5/css/bootstrap.min.css' %}">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="{% static 'scripts/bootstrap-3.3.5/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/project/chatRoom.css' %}">
+    <link href="{% static 'css/font.css' %}" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+</head>
+<body background="{% static 'images/05.jpg' %}">
+<nav class="blue lighten-3">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">Chat</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="{% url 'user:index_for_user' %}">{{ uname }}</a></li>
+          <li><a href="{% url 'user_center:show' %}">聊天吧！</a></li>
+          <li><a href="{% url 'comment:show_comment' %}">留言板</a></li>
+          <li><a href="{% url 'user:friend_config' %}">好友设置</a></li>
+          <li><a href="{% url 'user:friend_examine' %}">好友审核</a></li>
+          <li><a href="{% url 'user:view_personal' %}">个人信息</a></li>
+          <li><a href="{% url 'date:show_date' %}">我的行程</a></li>
+          <li><a href="{% url 'user:del_session' %}">登出</a></li>
+{#          <i class="material-icons"></i>#}
+      </ul>
+    </div>
+</nav>
+<div class="container">
+<h4> 选择一个用户进入聊天室页面：</h4>
+<ul>
+
+    {% for obj in objs %}
+        <li>
+          <div class="alert alert-warning" role="alert">
+              <img src="{{ obj.avatar.url }}" width="60px">
+             <a href="/chat/show_room/?friend={{ obj.account_number }}" class="alert-link">{{ obj.account_number }}</a>
+          </div>
+        </li>
+    {% endfor %}
+
+</ul>
+</div>
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="{% static 'scripts/jquery-1.12.0.min.js' %}"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="{% static 'scripts/bootstrap-3.3.5/js/bootstrap.min.js' %}"></script>
+
+</body>
+
+</html>

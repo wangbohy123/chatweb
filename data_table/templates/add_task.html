@@ -1,0 +1,22 @@
+{% extends 'show_date.html' %}
+{% load staticfiles %}
+{% block tables %}
+    <div class="nav nav2">
+			<div  id="add_btn" class="nav2_btn"><a href="{% url 'date:add_page' %}">添加待办事宜</a></div>
+        <div  id="unfinished_btn" class="nav2_btn"><a href="{% url 'date:view_tables' %}">待办事宜</a></div>
+			<div  id="finished_btn" class="nav2_btn"><a href="{% url 'date:view_finished' %}">已完成事宜</a></div>
+		</div>
+    <div class="center">
+
+<form  id="add_task" method="post" action="{% url 'date:add_task' %}">
+    {% csrf_token %}
+			<p>待办事宜：</p>
+
+			<input type="text" class="content" name="task_content">
+			<p>备注：</p>
+			<textarea  class="descr" cols="50" rows="600" name="task_descr"></textarea>
+			<input type="submit" value="确认"></input>
+		</form>
+
+    </div>
+{% endblock tables %}

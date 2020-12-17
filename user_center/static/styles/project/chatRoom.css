@@ -1,0 +1,11 @@
+#main
+{
+    height: 480px;
+}
+
+#scroll
+{
+    height:450px;
+    overflow:auto;
+    position: relative;
+}

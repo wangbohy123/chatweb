@@ -1,0 +1,103 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>user——center</title>
+    <meta charset="UTF-8">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="{% static 'scripts/bootstrap-3.3.5/css/bootstrap.min.css' %}">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="{% static 'scripts/bootstrap-3.3.5/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/project/chatRoom.css' %}">
+    <link href="{% static 'css/font.css' %}" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+</head>
+<body background="{% static 'images/08.jpg' %}">
+<nav class="blue lighten-3">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">Chat</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="{% url 'user:index_for_user' %}">{{ uname }}</a></li>
+          <li><a href="{% url 'user_center:show' %}">聊天吧！</a></li>
+          <li><a>留言板</a></li>
+          <li><a>我的行程</a></li>
+          <li><a href="{% url 'user:del_session' %}">登出</a></li>
+{#          <i class="material-icons"></i>#}
+      </ul>
+    </div>
+</nav>
+<div class="container">
+<img src="{{ friend.avatar.url }}" width="60px">
+<div  class="panel panel-success">
+    <div class="panel-heading">
+
+        <h3 class="panel-title">
+           与用户{{ friend_number }}的聊天室
+        </h3>
+    </div>
+<div id="main" class="panel-body">
+    <div id="scroll" data-spy="scroll" >
+
+    <ul  class="list-group">
+        {% for massage in massages %}
+            {% if massage.sender_id == uid %}
+            {# 如果我是发送者 #}
+                <li class="list-group-item right-align">
+                    <div >
+                        <span class="label label-warning">我:</span>
+                       {{ massage.massage }}
+                    </div>
+                </li>
+{#            {% elif massage.sender__id == fid %}#}
+            {% else %}
+                <li class="list-group-item ">
+                    <div >
+                        <span class="label label-info">{{ friend_number }}:</span>
+                       {{ massage.massage }}
+                    </div>
+                </li>
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+</div>
+</div>
+
+<div class="panel-footer">
+    <div class="input-group">
+        <form method="post" action="{% url 'chat:send_massage' %}">
+            {% csrf_token %}
+{#            <input type="text" class="form-control" name="data">#}
+            <textarea name="data" cols="200" rows="200"></textarea>
+            <input type="hidden" name="from" value="{{ uname }}">
+            <input type="hidden" name="to" value="{{ friend_number }}">
+                   <span class="input-group-btn">
+                      <button class="btn btn-info" type="submit">
+                         发送
+                      </button>
+                   </span>
+        </form>
+    </div><!-- /input-group -->
+ </div>
+</div>
+
+</div>
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="{% static 'scripts/jquery-1.12.0.min.js' %}"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="{% static 'scripts/bootstrap-3.3.5/js/bootstrap.min.js' %}"></script>
+
+</body>
+
+</html>

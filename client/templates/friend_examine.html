@@ -1,0 +1,14 @@
+{% extends 'index_for_user.html' %}
+{% load staticfiles %}
+
+{% block messages %}
+    <hr>
+<p><h5>请求列表:</h5></p>
+    {% for people in no %}
+        <h4><a>{{ people.account_number }}</a></h4>
+{#        <form method="get" action="/user/accept_apply/?number={{ people.account_number }}">#}
+{#            <button class="btn blue" type="submit">同意申请</button>#}
+        <a href="/user/accept_apply/?number={{ people.account_number }}">同意申请</a>
+{#        </form>#}
+    {% endfor %}
+{% endblock %}
